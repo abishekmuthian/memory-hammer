@@ -12,7 +12,9 @@ To solve Anki review accumulation by making the cards available for review when 
 Using e-paper display attached to a raspberry pi and memory-hammer software.
 
 ### Features
-
+1. Supports basic cards with plain text.
+2. Review Anki Cards and set Ease Factor.
+3. When a card is due, it's automatically displayed.
 
 ### Requirements
 1. [Raspberry Pi Zero](https://www.raspberrypi.com/products/raspberry-pi-zero/).
@@ -57,6 +59,7 @@ Using e-paper display attached to a raspberry pi and memory-hammer software.
 #### Short-term project goals
 + Improving the performance.
 + Improving the stability.
++ Adding more features through feedback.
 
 #### Long-term project goals
 + Make the project more accessible to non-technically inclined Anki users.
