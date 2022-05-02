@@ -6,7 +6,7 @@ An always-on Anki review system.
 Click the above image for a video demo.
 
 ### Why
-To solve Anki review accumulation by making the cards available for review when its due using always-on display system.
+To solve Anki review accumulation by making the cards available for review when its due using always-on display system. By extension addressing [Human Memory, lack of thereof](https://needgap.com/problems/41-human-memory-lack-of-thereof-psychology-neuroscience).
 
 ### How
 Using e-paper display attached to a raspberry pi and memory-hammer software.
@@ -28,7 +28,7 @@ Using e-paper display attached to a raspberry pi and memory-hammer software.
 5. pip3.10 install -r requirements.txt
 
 ### Usage
-1. Edit the **Config** section of the memory_hammer.py with the IP address of your Anki Desktop and port for Anki Connect.
+1. Edit the **Config** section of the **memory_hammer.py** with the IP address of your Anki Desktop and port for Anki Connect.
 2. python3.10 memory_hammer.py
 
 #### Download the Decks using Get Decks
