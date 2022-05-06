@@ -207,7 +207,8 @@ def invoke(action, **params):
     :return:
     """
     requestJson = json.dumps(request(action, **params)).encode('utf-8')
-    response = json.load(urllib.request.urlopen(urllib.request.Request('http://'+IPAddress+':'+Port, requestJson)))
+    response = json.load(
+        urllib.request.urlopen(urllib.request.Request('http://' + IPAddress + ':' + Port, requestJson)))
     if len(response) != 2:
         raise Exception('response has an unexpected number of fields')
     if 'error' not in response:
@@ -279,20 +280,44 @@ def get_anki_cards():
     """
     global cards
 
+    # Clearing cards to reset previous deck cards
+    cards.clear()
+
     logging.debug('Getting Anki Cards')
-    query = '"deck:' + decks[deck_position] + '"'
-    logging.debug(f"The findCards query is: {query}")
-    cards = invoke('findCards', query=query)
-    logging.debug(f"Got list of cards: {cards}")
-    logging.debug('Checking if the cards are due...')
-    due = invoke('areDue', cards=cards)
-    logging.debug(f"Got the due: {due}")
-    new_cards = []
-    for i in range(len(due)):
-        if due[i]:
-            new_cards.append(cards[i])
-    cards = new_cards
-    logging.debug('Cards which are due: {}'.format(cards))
+    if deck_position == 0:
+        existing_cards = []
+        for i in range(len(decks)):
+            if i == 0:
+                # Skip the 0. All deck
+                continue
+            else:
+                query = '"deck:' + decks[i] + '"'
+                logging.debug(f"The findCards query is: {query}")
+                cards = invoke('findCards', query=query)
+                logging.debug(f"Got list of cards: {cards}")
+                logging.debug('Checking if the cards are due...')
+                due = invoke('areDue', cards=cards)
+                logging.debug(f"Got the due: {due}")
+                for j in range(len(due)):
+                    if due[j]:
+                        existing_cards.append(cards[j])
+        cards = existing_cards
+        logging.debug('Cards which are due: {}'.format(cards))
+
+    else:
+        query = '"deck:' + decks[deck_position] + '"'
+        logging.debug(f"The findCards query is: {query}")
+        cards = invoke('findCards', query=query)
+        logging.debug(f"Got list of cards: {cards}")
+        logging.debug('Checking if the cards are due...')
+        due = invoke('areDue', cards=cards)
+        logging.debug(f"Got the due: {due}")
+        new_cards = []
+        for i in range(len(due)):
+            if due[i]:
+                new_cards.append(cards[i])
+        cards = new_cards
+        logging.debug('Cards which are due: {}'.format(cards))
 
 
 def get_anki_card_info(card_ids):
@@ -451,6 +476,8 @@ def select_card_to_show():
     """
     global page
 
+    logging.debug(f"Total cards remaining {len(cards)}")
+
     if len(cards) > 0:
         try:
             read_bmp(PagePath[page], 0, 0)
@@ -565,6 +592,7 @@ try:
                     logging.debug("Get Decks ...")
                     page = 2
                     get_anki_decks()
+                    decks.insert(0, '0. All')
                     read_bmp(PagePath[page], 0, 0)
                     show_anki_deck('Roboto-Black.ttf', DrawImage)
                     re_flag = 1

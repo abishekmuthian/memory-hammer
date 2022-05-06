@@ -36,6 +36,9 @@ Using e-paper display attached to a raspberry pi and memory-hammer software.
 #### Download the Decks using Get Decks
 ![Download the decks](demo/download-decks.png)
 
+#### Select 'All' if you don't want to select the decks individually
+![Select All decks](demo/select-all-decks.jpg)
+
 #### Select the deck for review using arrow buttons
 ![Select the deck for review](demo/select-deck.png)
 
@@ -68,6 +71,9 @@ Using e-paper display attached to a raspberry pi and memory-hammer software.
 
 ### Support
 If you think Memory Hammer is useful for you, [Support](https://buy.stripe.com/9AQ4k68AEcd7cBWcNm) the continuous development of Memory Hammer.
+
+### Built in Public
+Memory Hammer is being built in public here - https://twitter.com/Abishek_Muthian/status/1521340206611574785 . 
 
 #### License for Memory Hammer
 Memory Hammer, An always on Anki-review system.
